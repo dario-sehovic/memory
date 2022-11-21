@@ -1,9 +1,9 @@
-import { CardInterface } from '../components/Card';
+import { CardInterface, CardIds } from '../components/Card';
 import getCardById from './getCardById';
 
-const compareCardsById = (cards: Array<CardInterface>, a: number, b: number) => {
-  const imageA = getCardById(cards, a).image;
-  const imageB = getCardById(cards, b).image;
+const compareCardsById = (cards: Array<CardInterface>, cardIds: CardIds) => {
+  const imageA = getCardById(cards, cardIds[0]).image;
+  const imageB = getCardById(cards, cardIds[1]).image;
 
   return imageA === imageB;
 };

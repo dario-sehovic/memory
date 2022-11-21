@@ -2,57 +2,59 @@ import React, {
   useState,
   useEffect,
 } from 'react';
-import cardImages from './images/cards';
+
 import * as Helper from './helpers';
 
-import Card from './components/Card';
+import cardImages from './images/cards';
+import Card, { CardId, CardIds, CardInterface } from './components/Card';
 
+// Load and shuffle cards
 const cards = Helper.shuffleCards(cardImages);
 
 function App() {
   // Initialise the state
-  const [solvedCards, setSolvedCards] = useState<Set<number>>(new Set());
-  const [flippedCards, setFlippedCards] = useState<Array<number>>([]);
+  // Array of solved/paired cards
+  const [solvedCardIds, setSolvedCardIds] = useState<CardIds>([]);
+  // Array of currently active/flipped cards
+  const [flippedCardIds, setFlippedCardIds] = useState<CardIds>([]);
 
-  const handleClick = (cardId: number, isFlipped: boolean, isSolved: boolean) => {
-    // Ignore the click if the card is already solved
-    if (isFlipped || isSolved) {
-      return;
-    }
+  // Card click handler
+  const handleClick = (cardId: CardId, isFlipped: boolean, isSolved: boolean) => {
+    // Ignore the click if the card is already solved or flipped
+    if (isFlipped || isSolved) return;
 
-    setFlippedCards((prevFlippedCards: Array<number>) => {
+    setFlippedCardIds((prevFlippedCards: Array<number>) => {
+      // If no card is flipped, flip the card
+      // If two cards are flipped, validate them in the useEffect hook below and flip just this card
       if (prevFlippedCards.length % 2 === 0) return [cardId];
 
+      // If one card is flipped, open the current card besides the already flipped one
       return [prevFlippedCards[0], cardId];
     });
   };
 
+  // Validate the flipped cards
   useEffect(() => {
-    if (flippedCards.length === 2) {
-      const [firstCardId, secondCardId] = flippedCards;
-
-      if (Helper.compareCardsById(cards, firstCardId, secondCardId)) {
-        setSolvedCards((prevSolvedCards: Set<number>) => new Set(prevSolvedCards)
-          .add(firstCardId)
-          .add(secondCardId));
-      }
+    // If two cards are flipped, check if they match
+    if (flippedCardIds.length === 2 && Helper.compareCardsById(cards, flippedCardIds)) {
+      // If the cards match, present them as solved
+      setSolvedCardIds((prevSolvedCardIds: CardIds) => [
+        ...prevSolvedCardIds,
+        ...flippedCardIds,
+      ]);
     }
-  }, [flippedCards]);
-
-  if (!cards.length) {
-    return <div>Loading...</div>;
-  }
+  }, [flippedCardIds]);
 
   return (
     <div className="wrapper">
       <div className="board">
-        {cards.map((card) => (
+        {cards.map((card: CardInterface) => (
           <Card
             key={card.id}
             id={card.id}
             image={card.image}
-            flipped={flippedCards.indexOf(card.id) !== -1}
-            solved={solvedCards.has(card.id)}
+            flipped={flippedCardIds.includes(card.id)}
+            solved={solvedCardIds.includes(card.id)}
             handleClick={handleClick}
           />
         ))}

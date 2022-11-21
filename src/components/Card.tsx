@@ -2,13 +2,16 @@ import React from 'react';
 import classNames from 'classnames';
 import cardImages from '../images/cards';
 
+export type CardIds = Array<number>;
+export type CardId = number;
+
 export interface CardInterface {
-  id: number;
-  image: number;
+  id: CardId;
+  image: CardId;
 }
 
 export interface CardProps extends CardInterface {
-  handleClick: (id: number, isFlipped: boolean, isSolved: boolean) => void;
+  handleClick: (cardId: CardId, isFlipped: boolean, isSolved: boolean) => void;
   flipped: boolean;
   solved: boolean;
 }
