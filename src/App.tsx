@@ -31,8 +31,7 @@ function App() {
     if (flippedCards.length === 2) {
       const [firstCardId, secondCardId] = flippedCards;
 
-      // eslint-disable-next-line max-len
-      if (cards.find((card) => card.id === firstCardId)?.image === cards.find((card) => card.id === secondCardId)?.image) {
+      if (Helper.compareCardsById(cards, firstCardId, secondCardId)) {
         setSolvedCards((prevSolvedCards: Set<number>) => new Set(prevSolvedCards)
           .add(firstCardId)
           .add(secondCardId));
