@@ -24,11 +24,14 @@ function App() {
     if (isFlipped || isSolved) return;
 
     setFlippedCardIds((prevFlippedCards: Array<number>) => {
-      // If no card is flipped, flip the card
-      // If two cards are flipped, validate them in the useEffect hook below and flip just this card
+      // If no card is flipped, flip the clicked card
+      // If two cards are already flipped,
+      // validate them in the useEffect hook below and
+      // override them by flipping the clicked card
       if (prevFlippedCards.length % 2 === 0) return [cardId];
 
-      // If one card is flipped, open the current card besides the already flipped one
+      // If only one card is flipped,
+      // flip the clicked card besides the already flipped one
       return [prevFlippedCards[0], cardId];
     });
   };
