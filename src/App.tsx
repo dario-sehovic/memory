@@ -1,18 +1,20 @@
 import React, {
-  useState, useEffect, useCallback, useRef,
+  useState,
+  useEffect,
 } from 'react';
 import cardImages from './images/cards';
 import * as Helper from './helpers';
 
-import Card, { CardInterface } from './components/Card';
+import Card from './components/Card';
+
+const cards = Helper.shuffleCards(cardImages);
 
 function App() {
   // Initialise the state
-  const { current: cards } = useRef<Array<CardInterface>>(Helper.shuffleCards(cardImages));
   const [solvedCards, setSolvedCards] = useState<Set<number>>(new Set());
   const [flippedCards, setFlippedCards] = useState<Array<number>>([]);
 
-  const handleClick = useCallback((cardId: number, isFlipped: boolean, isSolved: boolean) => {
+  const handleClick = (cardId: number, isFlipped: boolean, isSolved: boolean) => {
     // Ignore the click if the card is already solved
     if (isFlipped || isSolved) {
       return;
@@ -23,7 +25,7 @@ function App() {
 
       return [prevFlippedCards[0], cardId];
     });
-  }, []);
+  };
 
   useEffect(() => {
     if (flippedCards.length === 2) {
@@ -36,7 +38,7 @@ function App() {
           .add(secondCardId));
       }
     }
-  }, [cards, flippedCards]);
+  }, [flippedCards]);
 
   if (!cards.length) {
     return <div>Loading...</div>;
