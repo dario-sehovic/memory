@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import cardImages from './images/cards';
+import * as Helper from './helpers';
 
 interface Card {
   id: number;
@@ -10,19 +11,9 @@ function App() {
   const [cards, setCards] = useState<Array<Card>>([]);
 
   useEffect(() => {
-    const newCards = [];
+    const newCards = Helper.shuffleCards(cardImages);
 
-    for (let i = 1; i <= Object.keys(cardImages).length; i += 1) {
-      newCards.push({
-        id: i * 2 - 1,
-        image: i,
-      }, {
-        id: i * 2,
-        image: i,
-      });
-    }
-
-    setCards(newCards.sort(() => Math.random() - 0.5));
+    setCards(newCards);
   }, []);
 
   if (!cards.length) {
