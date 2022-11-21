@@ -50,6 +50,9 @@ function App() {
 
   return (
     <div className="wrapper">
+      <div className="header">
+        <h1 className="header__title">Memory Game</h1>
+      </div>
       <div className="board">
         {cards.map((card: CardInterface) => (
           <Card

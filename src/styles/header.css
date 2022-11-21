@@ -1,0 +1,14 @@
+.header {
+    width: 85%;
+    display: flex;
+    margin-bottom: 2rem;
+}
+
+.header__title {
+    margin: 0;
+    padding: 0;
+    flex: 1;
+    font-size: 4rem;
+    font-family: "Bodoni Moda", serif;
+    font-weight: 800;
+}
