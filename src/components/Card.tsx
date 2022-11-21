@@ -35,7 +35,11 @@ function Card({
       onClick={() => handleClick(id, flipped, solved)}
     >
       <div className="card__inner">
-        <div className="card__front" />
+        <div className="card__front">
+          <span>
+            {image}
+          </span>
+        </div>
         <div className="card__back">
           <img src={cardImages[image]} alt="Card" />
         </div>

@@ -2,6 +2,8 @@
     width: 85%;
     display: flex;
     margin-bottom: 2rem;
+    gap: 2rem;
+    align-items: flex-end;
 }
 
 .header__title {
@@ -11,4 +13,8 @@
     font-size: 4rem;
     font-family: "Bodoni Moda", serif;
     font-weight: 800;
+}
+
+.header .button {
+    margin-bottom: 1rem;
 }

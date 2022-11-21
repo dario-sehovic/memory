@@ -53,6 +53,19 @@
     margin: 0.5rem;
 }
 
+.card__front {
+    color: transparent;
+}
+
+.card__front span {
+    display: block;
+    font-family: "Bodoni Moda", serif;
+    font-size: 2rem;
+    position: absolute;
+    bottom: 0.5rem;
+    right: 1rem;
+}
+
 .card__back {
     transform: rotateY(180deg);
 }

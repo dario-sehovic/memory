@@ -1,0 +1,16 @@
+.button {
+    height: 3rem;
+    border: none;
+    border-radius: 1rem;
+    background-color: #e9e9e2;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.2);
+    padding: 0 2rem;
+    cursor: pointer;
+    font-family: Montserrat, sans-serif;
+    font-weight: 500;
+    transition: all 200ms ease-out;
+}
+
+.button:hover {
+    scale: 1.1;
+}
