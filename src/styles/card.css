@@ -1,4 +1,7 @@
 .card {
+    margin: 0;
+    padding: 0;
+    border: 0;
     aspect-ratio: 1 / 1;
     background-color: transparent;
     perspective: 1000px;
@@ -17,10 +20,24 @@
     cursor: pointer;
 }
 
-.card--flipped .card__inner {
+.card--flipped .card__inner,
+.card--solved .card__inner {
     transform: rotateY(180deg);
-    scale: 1.1;
     cursor: default;
+}
+
+.card--flipped .card__inner {
+    scale: 1.1;
+    box-shadow: 0 0 0 0.25rem #51475e;
+}
+
+.card--solved .card__inner {
+    box-shadow: 0 0 0 0.25rem #62908e;
+}
+
+.card:not(.card--solved):not(.card--flipped):hover .card__inner {
+    transition-duration: 200ms;
+    scale: 1.1;
 }
 
 .card__front,
