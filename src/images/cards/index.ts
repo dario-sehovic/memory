@@ -36,4 +36,4 @@ export default {
   16: C16,
   17: C17,
   18: C18,
-};
+} as Record<number, string>;
