@@ -48,4 +48,8 @@ function Card({
   );
 }
 
-export default Card;
+const isCardTheSame = (prevProps: CardProps, nextProps: CardProps) => (
+  prevProps.flipped === nextProps.flipped && prevProps.solved === nextProps.solved
+);
+
+export default React.memo(Card, isCardTheSame);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import classNames from 'classnames';
 import * as Helper from '../helpers';
 
@@ -20,7 +20,7 @@ function Board({ cheatMode }: BoardProps) {
   const [flippedCardIds, setFlippedCardIds] = useState<CardIds>([]);
 
   // Card click handler
-  const handleClick = (cardId: CardId, isFlipped: boolean, isSolved: boolean) => {
+  const handleClick = useCallback((cardId: CardId, isFlipped: boolean, isSolved: boolean) => {
     // Ignore the click if the card is already solved or flipped
     if (isFlipped || isSolved) return;
 
@@ -35,7 +35,7 @@ function Board({ cheatMode }: BoardProps) {
       // flip the clicked card besides the already flipped one
       return [prevFlippedCards[0], cardId];
     });
-  };
+  }, []);
 
   // Validate the flipped cards
   useEffect(() => {
